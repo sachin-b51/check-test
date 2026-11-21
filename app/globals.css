@@ -1,0 +1,245 @@
+@import "tailwindcss";
+@import "./home-design.css";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --site-promo-height: 36px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --site-promo-height: 52px;
+  }
+}
+
+[data-theme="dark"] {
+  --background: #060c1f;
+  --foreground: #e9efff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: var(--site-promo-height);
+}
+
+.site-promo {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: var(--site-promo-height);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(87, 11, 22, .2);
+}
+
+.site-promo::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 28%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .16), transparent);
+  content: "";
+  pointer-events: none;
+  animation: site-promo-sheen 7s ease-in-out infinite;
+}
+
+@keyframes site-promo-sheen {
+  0%, 72% {
+    opacity: 0;
+    transform: translateX(-140%) skewX(-18deg);
+  }
+  78% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(470%) skewX(-18deg);
+  }
+}
+
+.site-promo-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: min(1240px, 92%);
+  height: 100%;
+  margin-inline: auto;
+}
+
+.site-promo-label {
+
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .14);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+.site-promo-copy {
+  min-width: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.site-promo-copy h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+
+.site-promo-copy p {
+  margin: 1px 0 0;
+  color: rgba(255, 255, 255, .86);
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.site-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #ffe18a;
+  color: #6f111a;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: .025em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color .2s, transform .2s;
+}
+
+.site-promo-cta svg {
+  animation: site-promo-arrow 1.8s ease-in-out infinite;
+}
+
+@keyframes site-promo-arrow {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+.site-promo-cta:hover svg {
+  transform: translateX(4px);
+  animation: none;
+}
+
+.site-promo-cta:hover {
+  transform: translateY(-1px);
+  background: #ffedb8;
+}
+
+.site-promo-cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.site-nav {
+  top: var(--site-promo-height);
+}
+
+@media (max-width: 640px) {
+  .site-promo-inner {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    row-gap: 1px;
+    width: calc(100% - 24px);
+  }
+
+  .site-promo-copy {
+    text-align: center;
+  }
+
+  .site-promo-copy h2 {
+    font-size: 11px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .site-promo-copy p {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .site-promo-cta {
+    align-self: center;
+    padding: 2px 8px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-promo::after,
+  .site-promo-cta svg {
+    animation: none;
+  }
+}
+
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tablet & Mobile scope button alignment */
+@media (max-width: 1023px) {
+  .bg-slate-200\/60 button {
+    flex: 1 1 0%;
+    text-align: center;
+  }
+}
+
+/* Touch manipulation optimization on mobile devices */
+@media (max-width: 640px) {
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}
+
+/* Compact theme switch inside the mobile header */
+@media (max-width: 640px) {
+  .pd-tt {
+    transform: scale(0.82);
+    margin: 0 -6px;
+  }
+}
